@@ -20,6 +20,7 @@ public class Main {
             switch (choice) {
                 case 1 -> createTask();
                 case 2 -> editTask();
+                case 3 -> viewTasks();
             }
 
         } while (choice != 5);
@@ -29,6 +30,18 @@ public class Main {
     private void createTask() {
 
         String name = IO.readln("Enter the name of the task (required):\n");
+
+        for (Task t : tasks ) {
+
+            if (t.getName().equals(name)) {
+                
+                IO.println("Task already exists.");
+                return;
+
+            }
+
+        }
+
         String description = IO.readln("Enter a description (optional):\n");
         
         tasks.addLast(new Task(name, description));
@@ -60,7 +73,25 @@ public class Main {
 
         }
 
-        IO.println("No task with the specified name found.");
+        IO.println("No task found.");
+
+    }
+
+    private void viewTasks() {
+
+        if (tasks.size() == 0) {
+            IO.println("Create some tasks first!");
+            return;
+        }
+
+        IO.println("Todo List:");
+        IO.println();
+        for (int i = 0; i < tasks.size(); i++) {
+
+            IO.println((i + 1) + ". " + tasks.get(i).toString());
+            IO.println();
+
+        }
 
     }
 
