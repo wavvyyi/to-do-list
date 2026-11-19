@@ -19,6 +19,7 @@ public class Main {
 
             switch (choice) {
                 case 1 -> createTask();
+                case 2 -> editTask();
             }
 
         } while (choice != 5);
@@ -26,9 +27,41 @@ public class Main {
     }
 
     private void createTask() {
+
         String name = IO.readln("Enter the name of the task (required):\n");
         String description = IO.readln("Enter a description (optional):\n");
+        
         tasks.addLast(new Task(name, description));
+
+    }
+
+    private void editTask() {
+
+        String name = IO.readln("Enter the name of the task you wish to modify:\n");
+
+        for (Task t : tasks) {
+
+            if (t.getName().equals(name)) {
+
+                String newName = IO.readln("Enter a new name or press Enter to continue:\n");
+                String newDescription = IO.readln("Enter a new description or press Enter to continue:\n");
+
+                if (!(newName.equals(""))) {
+                    t.setName(newName);
+                }
+
+                if (!(newDescription.equals(""))) {
+                    t.setDescription(newDescription);
+                }
+
+                return;
+
+            }
+
+        }
+
+        IO.println("No task with the specified name found.");
+
     }
 
 }
