@@ -21,6 +21,7 @@ public class Main {
                 case 1 -> createTask();
                 case 2 -> editTask();
                 case 3 -> viewTasks();
+                case 4 -> deleteTask();
             }
 
         } while (choice != 5);
@@ -50,7 +51,7 @@ public class Main {
 
     private void editTask() {
 
-        String name = IO.readln("Enter the name of the task you wish to modify:\n");
+        String name = IO.readln("Enter the name of the task:\n");
 
         for (Task t : tasks) {
 
@@ -73,7 +74,7 @@ public class Main {
 
         }
 
-        IO.println("No task found.");
+        IO.println("No such task found.");
 
     }
 
@@ -92,6 +93,27 @@ public class Main {
             IO.println();
 
         }
+
+    }
+
+    private void deleteTask() {
+
+        String name = IO.readln("Enter the name of the task:\n");
+
+        for (int i = 0; i < tasks.size(); i++) {
+
+            if (tasks.get(i).getName().equals(name)) {
+
+                tasks.remove(i);
+                IO.println("\"" + name + "\" successfully removed.");
+
+                return;
+
+            }
+
+        }
+
+        IO.println("No such task found.");
 
     }
 
